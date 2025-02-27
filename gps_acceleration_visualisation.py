@@ -97,7 +97,7 @@ st.metric("Keskinopeus:" ,f"{df_gps['Speed (m/s)'].mean():.3f} m/s")
 st.metric("Kokonaismatka:" ,f"{df_gps['Distance (km)'].max():.3f} km")
 st.write(f"Askelpituus: {round(askelpituus)} cm")
 # Draw filtered acceleration component
-st.subheader('Suodatettu kiihtyvyyden y-komponentti')
+st.subheader('Suodatettu kiihtyvyyden x-komponentti')
 st.line_chart(df_la, x = 'Time (s)', y = 'Filtered acceleration x' , y_label = 'Kiihtyvyys x-akselilla',x_label = 'Aika (s)')
 # Draw Fourier analysis
 st.subheader('Tehospektri')
