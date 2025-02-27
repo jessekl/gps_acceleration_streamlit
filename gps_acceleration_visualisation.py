@@ -7,6 +7,8 @@ from math import radians, cos, sin, asin, sqrt
 from scipy.signal import butter, filtfilt
 
 df_gps = pd.read_csv("https://raw.githubusercontent.com/jessekl/gps_acceleration_streamlit/refs/heads/main/Location.csv")
+df_la = pd.read_csv("https://raw.githubusercontent.com/jessekl/gps_acceleration_streamlit/refs/heads/main/Linear%20Acceleration.csv")
+
 def trim_time(df, start, end):
     max_time = df['Time (s)'].max()
     df = df[df["Time (s)"] >= start]
@@ -16,7 +18,7 @@ def trim_time(df, start, end):
 time_from_start = 12
 time_from_end = 4
 df_gps = trim_time(df_gps, time_from_start, time_from_end)
-
+df_la = trim_time(df_la, time_from_start, time_from_end)
 
 def haversine(lon1, lat1, lon2, lat2):
     lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
@@ -57,8 +59,6 @@ def butter_highpass_filter(data, cutoff, fs, nyq, order):
     return y
 
 # Acceleration data analysis
-df_la = pd.read_csv("Linear Acceleration.csv")
-df_la = trim_time(df_la, time_from_start, time_from_end)
 
 data = df_la['Linear Acceleration x (m/s^2)']
 t = df_la['Time (s)'].max()
